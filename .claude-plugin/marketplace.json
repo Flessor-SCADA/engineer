@@ -1,0 +1,11 @@
+{
+  "name": "flessor-engineer",
+  "owner": { "name": "Flessor" },
+  "plugins": [
+    {
+      "name": "engineer",
+      "source": "./",
+      "description": "Ponte local entre o agente de IA e o Flessor Studio (v6+): consultar e editar projeto, menus, telas, máquinas, mapas, alarmes, tags virtuais e relatórios."
+    }
+  ]
+}
