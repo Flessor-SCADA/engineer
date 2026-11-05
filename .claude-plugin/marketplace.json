@@ -1,11 +1,16 @@
 {
   "name": "flessor-engineer",
-  "owner": { "name": "Flessor" },
+  "owner": {
+    "name": "Flessak Eletro Industrial S.A."
+  },
   "plugins": [
     {
-      "name": "engineer",
+      "name": "flessor-engineer",
       "source": "./",
       "description": "Ponte local entre o agente de IA e o Flessor Studio (v6+): consultar e editar projeto, menus, telas, máquinas, mapas, alarmes, tags virtuais e relatórios."
     }
-  ]
+  ],
+  "metadata": {
+    "description": "Ponte local entre o agente de IA e o Flessor Studio (v6+): consultar e editar projeto, menus, telas, máquinas, mapas, alarmes, tags virtuais e relatórios."
+  }
 }

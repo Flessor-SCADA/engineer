@@ -1,9 +1,17 @@
 {
-  "name": "engineer",
-  "version": "1.0.0",
+  "name": "flessor-engineer",
+  "version": "1.1.0",
   "description": "Ponte local entre o agente de IA e o Flessor Studio (v6+): consultar e editar projeto, menus, telas, máquinas, mapas, alarmes, tags virtuais e relatórios.",
-  "author": { "name": "Flessor" },
+  "author": {
+    "name": "Flessak Eletro Industrial S.A."
+  },
   "homepage": "https://github.com/Flessor-SCADA/engineer",
   "repository": "https://github.com/Flessor-SCADA/engineer",
-  "keywords": ["flessor", "scada", "studio", "hmi", "engenharia"]
+  "keywords": [
+    "flessor",
+    "scada",
+    "studio",
+    "hmi",
+    "engenharia"
+  ]
 }

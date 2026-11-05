@@ -1,6 +1,8 @@
 # Flessor Engineer — skill de agente para o Flessor Studio
 
-Skill que permite a um agente de IA (Claude Code, Codex e similares) **instalado na mesma máquina do Flessor Studio** consultar e editar o projeto aberto: menus, telas, máquinas, mapas de variáveis, alarmes, tags virtuais e relatórios personalizados — sem automação de interface e sem código-fonte.
+Skill que permite a um agente de IA (Claude Code, Codex e similares) **instalado na mesma máquina do Flessor Studio** consultar e editar o projeto aberto: menus, telas, máquinas, mapas de variáveis, alarmes, tags virtuais e relatórios personalizados — sem automação de interface e sem código-fonte. Flessor é a linha de produtos da Flessak Eletro Industrial S.A.
+
+**Onde funciona:** agentes instalados no Windows da máquina do Studio, como Claude Code e Codex. Não funciona em chat na web ou no celular.
 
 > **Requisito: Flessor Studio versão 6 ou superior.** Versões anteriores não têm a ponte. Confira a versão em **AJUDA → Sobre**.
 
@@ -11,7 +13,15 @@ Skill que permite a um agente de IA (Claude Code, Codex e similares) **instalado
 3. O agente troca arquivos com o Studio numa pasta temporária do seu usuário do Windows. A ponte não abre porta de rede.
 4. O que o agente altera no projeto fica **em memória** até você salvar no Studio ou confirmar um registro de versão, que também pode gravar o projeto. Revise antes. Ao salvar, o Studio pode dizer que "não tem alterações" e perguntar se salva mesmo assim: **responda Sim**. Fechar sem salvar perde tudo, sem aviso.
 
-Para dados de operação (tempo real, histórico, alarmes reais), use o plugin irmão **[analytics](https://github.com/Flessor-SCADA/analytics)**.
+Para dados de operação (tempo real, histórico, alarmes reais), use o plugin irmão **[flessor-analytics](https://github.com/Flessor-SCADA/analytics)**.
+
+## Exemplos de pedido
+
+Troque pelos nomes do seu projeto:
+
+- "Liste as máquinas e os menus deste projeto."
+- "Explique o que mostra a tela Vertedouro."
+- "Crie uma máquina Modbus para este medidor, com mapa, alarme de falha de comunicação e uma tela simples de leitura."
 
 ## Instalação
 
@@ -19,18 +29,27 @@ Para dados de operação (tempo real, histórico, alarmes reais), use o plugin i
 
 ```text
 /plugin marketplace add Flessor-SCADA/engineer
-/plugin install engineer@flessor-engineer
+/plugin install flessor-engineer@flessor-engineer
 ```
 
-Depois, é só pedir em linguagem natural ("crie uma tela para o medidor X"). A skill se chama `engineer:studio-agent-bridge` e também pode ser chamada por esse nome. Se ela não aparecer, reinicie o Claude Code e confira com `/plugin`.
+O formato é `plugin@marketplace`, e aqui os dois têm o mesmo nome. O repositório se chama `engineer` porque fica na organização `Flessor-SCADA`.
+
+Depois, é só pedir em linguagem natural ("crie uma tela para o medidor X"). A skill se chama `flessor-engineer:flessor-studio-bridge` e também pode ser chamada por esse nome. Se ela não aparecer, reinicie o Claude Code e confira com `/plugin`.
 
 ### Codex
 
-Baixe este repositório (**Code → Download ZIP** ou `git clone`) e copie a pasta `skills\studio-agent-bridge` para `%USERPROFILE%\.codex\skills\` (crie a pasta se não existir) ou para `.agents\skills\` do seu projeto.
+Baixe este repositório (**Code → Download ZIP** ou `git clone`) e copie a pasta `skills\flessor-studio-bridge` para `%USERPROFILE%\.codex\skills\` (crie a pasta se não existir) ou para `.agents\skills\` da pasta onde você abre o Codex.
 
 ### Outros agentes / instalação manual
 
-Copie `skills\studio-agent-bridge` para a pasta de skills do seu agente (no Claude Code: `%USERPROFILE%\.claude\skills\`). A skill é Markdown puro, no formato aberto `SKILL.md`.
+Copie `skills\flessor-studio-bridge` para a pasta de skills do seu agente (no Claude Code: `%USERPROFILE%\.claude\skills\`). A skill é Markdown puro, no formato aberto `SKILL.md`.
+
+### Já instalou a versão 1.0?
+
+O nome mudou de `engineer` / `studio-agent-bridge` para `flessor-engineer` / `flessor-studio-bridge`.
+
+- **Plugin:** rode `/plugin uninstall engineer@flessor-engineer`, depois `/plugin marketplace update flessor-engineer` e instale de novo.
+- **Cópia manual:** apague a pasta `studio-agent-bridge` e copie a nova.
 
 ## Segurança — leia antes de usar
 
@@ -46,4 +65,8 @@ Copie `skills\studio-agent-bridge` para a pasta de skills do seu agente (no Clau
 
 ## Problemas e sugestões
 
-Abra uma issue em <https://github.com/Flessor-SCADA/engineer/issues>. Não inclua senhas, IPs nem dados do seu projeto.
+Falha de segurança: veja [SECURITY.md](SECURITY.md). O resto: abra uma issue em <https://github.com/Flessor-SCADA/engineer/issues>. Não inclua senhas, IPs nem dados do seu projeto.
+
+## Licença
+
+Uso conforme o arquivo [LICENSE](LICENSE). Fabricante: Flessak Eletro Industrial S.A.

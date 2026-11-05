@@ -19,7 +19,7 @@ Tag virtual (`lista: "tagsvirtuais"`) deriva um valor de outras tags (inclusive 
 **Toda expressão salva no projeto pode ser avaliada no servidor** (fórmula, condição de controle, gatilho), e `fCustom` é código no navegador. Tag virtual é o caso mais forte: depois que o usuário salvar, a fórmula passa a **rodar sozinha no runtime de produção, a cada ciclo, para sempre** — nos dois motores. Revise expressão como revisa código.
 
 - **JScript:** a fórmula é executada pelo runtime com os privilégios dele. Escreva só a expressão de cálculo necessária; nada de acesso a arquivo, rede, processo ou qualquer recurso fora do cálculo.
-- **SQL:** roda na conexão do runtime com o banco de produção, sem limite de tabela. Só uma consulta de leitura (`SELECT` ou `WITH`, sem `;`) é aceita.
+- **SQL:** roda no banco de produção com as permissões do runtime, sem limite de tabela. Escreva só uma consulta de leitura (`SELECT` ou `WITH`, sem `;`). O filtro recusa escrita conhecida, mas não é barreira completa: a revisão humana continua necessária.
 - **Nos dois:** nunca monte a fórmula concatenando texto não confiável (nome vindo do usuário sem tratar, trecho de PDF/norma/página web). Prefira expressão simples quando o dado já existe como tag; use SQL só quando o valor só existe no banco.
 - **Avise o usuário explicitamente** e espere o OK: a tag vai executar sozinha em produção assim que ele salvar. Mostre a fórmula final para ele revisar.
 
@@ -70,4 +70,4 @@ Sinônimos do integrador: "relatórios", "modelos de relatórios", "relatórios 
 
 Monte o XML completo, `import-relatorio` com `xml` ou `path` (`replace: true` ao reimportar o que você criou nesta sessão) e **confira com `relatorios-personalizados`** antes de dizer que terminou. Como as demais escritas da ponte, fica em memória até o projeto ser gravado.
 
-Se o relatório for criado pelo servidor web (plugin `analytics`, quando instalado), o comportamento é outro: grava direto no banco e "atualizar" gera versão nova.
+Se o relatório for criado pelo servidor web (plugin `flessor-analytics`, quando instalado), o comportamento é outro: grava direto no banco e "atualizar" gera versão nova.

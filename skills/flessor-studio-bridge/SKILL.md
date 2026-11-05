@@ -1,5 +1,5 @@
 ---
-name: studio-agent-bridge
+name: flessor-studio-bridge
 description: Use quando precisar operar o Flessor Studio (editor do Supervisório Flessor) programaticamente, sem automação de interface — consultar o projeto, criar/editar menus, telas, máquinas, mapas de variáveis, ocorrências, tags virtuais e relatórios personalizados, montar telas de controle/monitoramento para equipamentos novos, testar comunicação com o equipamento. Requer Flessor Studio versão 6 ou superior, aberto na mesma máquina do agente, com o menu "Conectar Agente" ativo. Não requer (nem usa) código-fonte.
 ---
 
@@ -7,9 +7,9 @@ description: Use quando precisar operar o Flessor Studio (editor do Supervisóri
 
 > **Requisito: Flessor Studio versão 6 ou superior.** Versões anteriores não têm a ponte. O menu fica em **EDITAR → Janelas → Conectar Agente**. Se o usuário não encontrar, confirme a versão em **AJUDA → Sobre** antes de qualquer outra investigação e, se for anterior à 6, oriente a atualizar — não tente contornar.
 
-O Studio (`Flessak.Studio.exe`, Windows) pode ser controlado por um agente instalado **na mesma máquina** via troca de arquivos JSON: sem porta de rede, sem MCP, sem automação de interface. Tudo o que você precisa sobre o protocolo e as convenções está nesta skill — **você não tem e não precisa de código-fonte**. Se algo aqui parecer desatualizado (comando que não existe, campo que não bate), **teste com uma chamada real** antes de assumir.
+O Flessor Studio (`Flessak.Studio.exe`, Windows; "Flessak" nos nomes técnicos é a fabricante) pode ser controlado por um agente instalado **na mesma máquina** via troca de arquivos JSON: sem porta de rede, sem MCP, sem automação de interface. Tudo o que você precisa sobre o protocolo e as convenções está nesta skill — **você não tem e não precisa de código-fonte**. Se algo aqui parecer desatualizado (comando que não existe, campo que não bate), **teste com uma chamada real** antes de assumir.
 
-**Escopo: estrutura, parametrização, configuração e design** — projeto, menus, telas, máquinas, mapas, ocorrências configuradas. A ponte **não** tem dado de runtime (valor ao vivo, histórico, eventos reais de alarme). Para isso, com o plugin `analytics` instalado, use a skill `supervisorio-mcp`; sem ele, oriente o usuário a consultar o site do supervisório. As duas se completam: ponte = "como foi configurado"; MCP = "o que está acontecendo agora".
+**Escopo: estrutura, parametrização, configuração e design** — projeto, menus, telas, máquinas, mapas, ocorrências configuradas. A ponte **não** tem dado de runtime (valor ao vivo, histórico, eventos reais de alarme). Para isso, oriente o usuário a consultar o site do supervisório ou, se quiser, a usar o plugin `flessor-analytics`. As duas se completam: ponte = "como foi configurado"; MCP = "o que está acontecendo agora".
 
 Material de apoio (leia só quando a tarefa pedir):
 
@@ -151,7 +151,7 @@ Rodam em segundo plano no Studio (não travam a tela), mas levam de segundos a d
 - Mais de uma ocorrência com a mesma `variavel` → o comando recusa por ambiguidade. Desambigue com `mensagem` ou use o `index` de `ocorrencias`. O `index` muda depois de um `remove`: reliste antes de remover em lote.
 - **`nivelAlarme` na prática é binário:** `1` = alarme comum (exige atenção), `100` = trip (atuação real de proteção — disjuntor abriu, bandeirola de proteção). Não invente valor intermediário; na dúvida, pergunte. **Sempre mande o campo**: omitido, vira trip.
 - Crie já com `causa`/`solucao` (documentação ISA-18.2) — alarme sem documentação nasce como dívida.
-- **"Encontre os alarmes inúteis":** aqui você só vê a metade "documentação" (quem tem `causa`/`solucao`). Se o alarme dispara demais ou nunca é reconhecido é histórico de eventos: com o plugin `analytics` instalado, use a skill `supervisorio-mcp`; sem ele, peça ao usuário o painel de desempenho de alarmes do site. Alarme sem documentação **e** ruidoso = candidato forte a revisar/remover.
+- **"Encontre os alarmes inúteis":** aqui você só vê a metade "documentação" (quem tem `causa`/`solucao`). Se o alarme dispara demais ou nunca é reconhecido é histórico de eventos: peça ao usuário o painel de desempenho de alarmes do site ou, se ele quiser, o plugin `flessor-analytics`. Alarme sem documentação **e** ruidoso = candidato forte a revisar/remover.
 
 ## Catálogo de imagens (`import-image`)
 
@@ -209,6 +209,6 @@ Opera no **histórico de versões do projeto do cliente**, mantido pelo Studio (
 - **`commit-projeto` é permanente e o Studio não pede confirmação** — o registro sai com o usuário do Windows/Studio logado, e o comando pode gravar o projeto em disco com tudo o que estiver pendente em memória. Na confirmação, liste o que vai junto. **Regra dura, mesmo que o usuário diga "commita pra mim":** chame `diff-projeto`, componha o descritivo, mostre no chat e só chame `commit-projeto` depois de confirmação explícita. Nunca encadeie os dois no mesmo passo. Inclua no descritivo que a alteração foi feita com apoio de agente de IA.
 - Promover versão para homologação/produção **não** é feito pela ponte — fica com o usuário, no Studio.
 
-## Aprendizados novos
+## Problemas e sugestões
 
-Quando o usuário pedir para "aprender" algo sobre esta ponte, registre num arquivo de notas local do usuário (ou na memória do seu agente). Se for defeito ou lacuna da skill, sugira ao usuário reportar em <https://github.com/Flessor-SCADA/engineer/issues>.
+Defeito ou lacuna desta skill: sugira ao usuário reportar em <https://github.com/Flessor-SCADA/engineer/issues>.
